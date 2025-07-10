@@ -148,6 +148,17 @@
                 div.className = 'message ' + (msg.role === 'user' ? 'user' : 'assistant');
                 // Only replace newlines with <br>, do not replace spaces with &nbsp;
                 div.innerHTML = msg.content.replace(/\n/g, '<br>');
+                // If the assistant message has an image_url, display the image below the text
+                if (msg.role === 'assistant' && msg.image_url) {
+                    const img = document.createElement('img');
+                    img.src = msg.image_url;
+                    img.alt = 'Generated Image';
+                    img.style.display = 'block';
+                    img.style.maxWidth = '320px';
+                    img.style.marginTop = '10px';
+                    img.style.borderRadius = '12px';
+                    div.appendChild(img);
+                }
                 convDiv.appendChild(div);
             }
         }
